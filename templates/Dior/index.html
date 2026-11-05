@@ -1,0 +1,329 @@
+{% extends 'Dior/base.html' %}
+{% load static %}
+
+{% block title %}Home | Dior{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero{display: flex;flex-direction: column;justify-content: center;align-items: center;text-align: center;padding: 30px 0;gap: 30px;}
+    .hero2 {width: 100%;min-height: 1000px;display: flex;flex-direction: column;justify-content: center;align-items: center;background-size: cover; background-position: center;background-repeat: no-repeat;background-color: rgba(0, 0, 0, 0.4); background-blend-mode: overlay; margin-top: -143px;margin-bottom: 80px;background-image: url('/static/assets/21.webp');}    
+    .s1 {font-size: 300px;font-family: "Times New Roman", serif;color: transparent;-webkit-text-stroke: 2px rgb(255, 255, 255);}
+    .hero2 h2 {margin-bottom: 30px;font-size: 40px;color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);display: flex;}
+    .hero2 p {font-size: 20px;color: #f0f0f0; text-shadow: 1px 1px 5px rgba(0,0,0,0.5);display: flex;}
+    .btn{display: inline-block;margin-top: 30px;padding: 10px 30px;color: #443938;border: 2px solid #645452;border-radius: 5px;text-decoration: none;font-size: 20px;display: flex;justify-content: center;align-items: center;}
+    .btn:hover {background-color: #333;color: #fff;}
+    
+    .product-grid {display: grid;grid-template-columns: repeat(4, 1fr);gap: 20px;max-width: 100%; width: 100%;margin: 0 auto;padding: 18px 18px;}
+    .product-card {background-color: #ffffff;border-radius: 4px;padding: 10px;height: 600px;text-align: center;display: flex;flex-direction: column;align-items: center;transition: all 0.3s ease-in-out;border: 1px solid transparent;box-shadow: 0 0 0 rgba(0,0,0,0);}
+    .product-card:hover {box-shadow: 0 10px 20px rgba(0,0,0,0.08);border: 1px solid rgb(129, 128, 128);transform: translateY(-4px);}
+    .image-wrapper {width: 100%;height: 400px; display: flex;justify-content: center;align-items: center;overflow: hidden;margin-bottom: 15px;}
+    .image-wrapper img {max-width: 100%;max-height: 100%;object-fit: cover;}
+    .product-info {width: 100%;}
+    .product-title {font-size: 14px;color: #333;font-weight: 500;margin-bottom: 5px;}
+    .product-rating {font-size: 12px;color: #888;margin-bottom: 5px;letter-spacing: 1px;}
+    .product-price {font-size: 13px;font-weight: bold;color: #111;margin-bottom: 15px;}
+    
+    .container {display: flex;width: 100%;height: 100vh;margin-top: -150px;}
+    .left {width: 40%;height: 92.5%;display: flex;justify-content: center;align-items: center;gap: 30px;padding: 30px;}
+    .product-item {display: flex;flex-direction: column;align-items: center;width: 45%;}
+    .product-name {font-size: 15px;font-weight: 600;color: #1a1a1a;margin-top: 15px;text-align: center;letter-spacing: 0.5px;}
+    .product-desc {font-size: 13px;color: #888;text-align: center;margin-top: 8px;letter-spacing: 0.3px;}
+    .right {width: 60%;display: flex;flex-direction: column;justify-content: center;align-items: center;padding: 60px;text-align: center;}
+    .container-reverse {display: flex;width: 100%;height: 100vh;margin-top: -300px;}
+    .left-reverse {width: 40%;height: 92.5%;display: flex;justify-content: center;align-items: center;gap: 30px;padding: 30px;}
+    .left-reverse .product-item {display: flex;flex-direction: column;align-items: center;width: 45%;}
+    .left-reverse .product-name {font-size: 15px;font-weight: 600;color: #1a1a1a;margin-top: 15px;text-align: center;letter-spacing: 0.5px;}
+    .left-reverse .product-desc {font-size: 13px;color: #888;text-align: center;margin-top: 8px;letter-spacing: 0.3px;}
+    .right-reverse {width: 60%;display: flex;flex-direction: column;justify-content: center;align-items: center;padding: 60px;text-align: center;}
+    .logo {font-size: 20px;letter-spacing: 8px;font-weight: bold;color: #1a1a1a;margin-bottom: 8px;}
+    .title {font-size: 52px;font-weight: 300;letter-spacing: 4px;color: #1a1a1a;margin: 5px 0;}
+    .subtitle {font-size: 15px;font-weight: 300;letter-spacing: 3px;color: #999;margin-bottom: 12px;}
+    .divider {width: 40px;height: 1px;margin: 12px 0;}
+    .desc {font-size: 14px;line-height: 1.9;color: #555;max-width: 350px;margin-bottom: 25px;font-family: 'Arial', sans-serif;}
+    .btn2 {background: #1a1a1a;color: #fff;padding: 14px 45px;text-decoration: none;letter-spacing: 2.5px;font-size: 12px;font-family: 'Arial', sans-serif;text-transform: uppercase;transition: 0.3s;border: none;cursor: pointer;}
+    .btn2:hover {background-color: #e4e4e4;color: black;border: 1px solid rgb(50, 50, 50);}
+    .dior-brand-card {padding: 28px 40px 24px;width: 100%;max-width: 100%;border-bottom: 1px solid #e8e8e8;transition: all 0.3s ease;margin-top: -160px;}
+    .brand-header {display: flex;align-items: center;gap: 14px;margin-bottom: 12px;padding-bottom: 12px;border-bottom: 1px solid #eeeeee;}
+    .brand-header .brand-name {font-size: 30px;font-family: "Times New Roman", serif;font-weight: 700;letter-spacing: 1.5px;color: #2a2a2a;}
+    .brand-description {font-size: 20px;line-height: 1.85;color: #000000;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;letter-spacing: 0.2px;padding: 2px 0;max-width: 100%;}
+    .left .product-item img, .left-reverse .product-item img {width: 100%;max-width: 260px;height: 320px;object-fit: cover;border-radius: 15px;display: block;}
+    
+    /* 👇 استایل اختصاصی دکمه View توی ویترین 👇 */
+    .view-btn {
+        display: inline-block;
+        background: transparent;
+        border: 1.5px solid #d0cece;
+        border-radius: 30px;
+        padding: 7px 32px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #1a1a1a;
+        cursor: pointer;
+        transition: 0.3s;
+        letter-spacing: 1px;
+        text-decoration: none;
+        text-align: center;
+    }
+    .view-btn:hover {
+        background: #1a1a1a;
+        color: #fff;
+        border-color: #1a1a1a;
+    }
+
+    /* 👇 استایل دکمه ناموجود قرمز 👇 */
+    .out-of-stock-btn {
+        background: #fde8e8;
+        color: #c0392b;
+        border: 1.5px solid #fad4d4;
+        border-radius: 30px;
+        padding: 7px 32px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: not-allowed;
+        letter-spacing: 1px;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .hero2 {min-height: 300px;margin-top: -30px;margin-bottom: 30px;padding: 20px 15px;}
+        .s1 {font-size: 60px;-webkit-text-stroke: 1px white;}
+        .hero2 h2, .hero2 p {display: none;}
+        .product-grid {grid-template-columns: repeat(1, 1fr);gap: 30px;width: 80%;margin: 0 auto;padding: 18px 18px;}
+        .container, .container-reverse {flex-direction: column;height: auto;margin-top: 0;padding: 10px;margin-bottom: 30px;}
+        .container-reverse {flex-direction: column-reverse;}
+        .left, .left-reverse {width: 100%;height: auto;padding: 20px 10px;gap: 25px;flex-wrap: wrap;justify-content: center;}
+        .right, .right-reverse {width: 100%;padding: 30px 16px;}
+        .product-item {width: 45%;}
+        .product-item img {max-width: 160px;border-radius: 12px;}
+        .title {font-size: 32px;letter-spacing: 2px;}
+        .dior-brand-card {margin-top: 0;padding: 18px 16px 16px;}
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="hero">
+        {% if hero.hero_background %}
+        <style>.hero2 { background-image: url('{{ hero.hero_background.url }}') !important; }</style>
+        {% endif %}
+        <div class="hero2">
+            <span class="s1">DIOR</span>
+            <h2 style="margin-bottom: 30px; font-size: 40px;">
+                {{ hero.hero_title|default:"Timeless Elegance" }}
+            </h2>
+            <p style="font-size: 20px;">
+                {{ hero.hero_subtitle|default:"Discover luxury fashion and beauty collections." }}
+            </p>
+        </div>
+
+        <div class="product-grid">
+            {% for product in showcase_products %}
+            <div class="product-card">
+                <div class="image-wrapper">
+                    {% if product.main_image %}
+                        <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <div class="product-rating">★★★★★</div>
+                    <p class="product-price">${{ product.price }}</p>
+                    
+                    {% if product.in_stock %}
+                        <a href="{% url 'product_url' product.id %}" class="view-btn">View</a>
+                    {% else %}
+                        <span class="out-of-stock-btn">Out of Stock</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p style="text-align: center; width: 100%; grid-column: 1/-1;">No products found.</p>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'collections_url' %}" class="btn"> shop </a>
+    </div>
+
+    <!-- بخش کفش -->
+    <div class="container" style="margin-bottom:100px;">
+        <div class="left">
+            {% if sections.shoes %}
+                {% if sections.shoes.product_1 %}
+                <div class="product-item">
+                    {% if sections.shoes.product_1.main_image %}
+                        <img src="{{ sections.shoes.product_1.main_image.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                    <div class="product-name">{{ sections.shoes.product_1.name }}</div>
+                    <div class="product-desc">{{ sections.shoes.product_1.description|truncatewords:5 }}</div>
+                </div>
+                {% endif %}
+                {% if sections.shoes.product_2 %}
+                <div class="product-item">
+                    {% if sections.shoes.product_2.main_image %}
+                        <img src="{{ sections.shoes.product_2.main_image.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                    <div class="product-name">{{ sections.shoes.product_2.name }}</div>
+                    <div class="product-desc">{{ sections.shoes.product_2.description|truncatewords:5 }}</div>
+                </div>
+                {% endif %}
+            {% else %}
+                 <p style="text-align: center; width: 100%;">No products selected in Admin.</p>
+            {% endif %}
+        </div>
+        <div class="right">
+            <div class="logo">D I O R</div>
+            <div class="title">Dior Footwear</div>
+            <div class="subtitle">{{ sections.shoes.subtitle|default:"Step into Elegance" }}</div>
+            <div class="divider"></div>
+            <div class="desc">{{ sections.shoes.description|default:"Discover Dior's exquisite footwear collection..." }}</div>
+            <a href="{% url 'shoes_url' %}" class="btn2">Explore Footwear</a>
+        </div>
+    </div>
+
+    <!-- بخش عطر -->
+    <div class="container-reverse" style="margin-bottom:10px;">
+        <div class="right-reverse">
+            <div class="logo">D I O R</div>
+            <div class="title">Dior Fragrance</div>
+            <div class="subtitle">{{ sections.perfumes.subtitle|default:"The Art of Perfumery" }}</div>
+            <div class="divider"></div>
+            <div class="desc">{{ sections.perfumes.description|default:"Discover the enchanting world of Dior perfumes..." }}</div>
+            <a href="{% url 'perfumes_url' %}" class="btn2">Explore Fragrances</a>
+        </div>
+        <div class="left-reverse">
+            {% if sections.perfumes %}
+                {% if sections.perfumes.product_1 %}
+                <div class="product-item">
+                    {% if sections.perfumes.product_1.main_image %}
+                        <img src="{{ sections.perfumes.product_1.main_image.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                    <div class="product-name">{{ sections.perfumes.product_1.name }}</div>
+                    <div class="product-desc">{{ sections.perfumes.product_1.description|truncatewords:5 }}</div>
+                </div>
+                {% endif %}
+                {% if sections.perfumes.product_2 %}
+                <div class="product-item">
+                    {% if sections.perfumes.product_2.main_image %}
+                        <img src="{{ sections.perfumes.product_2.main_image.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                    <div class="product-name">{{ sections.perfumes.product_2.name }}</div>
+                    <div class="product-desc">{{ sections.perfumes.product_2.description|truncatewords:5 }}</div>
+                </div>
+                {% endif %}
+            {% else %}
+                 <p style="text-align: center; width: 100%;">No products selected in Admin.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- بخش مراقبت پوست -->
+    <div class="container" style="margin-bottom:100px;">
+        <div class="left">
+            {% if sections.skincare %}
+                {% if sections.skincare.product_1 %}
+                <div class="product-item">
+                    {% if sections.skincare.product_1.main_image %}
+                        <img src="{{ sections.skincare.product_1.main_image.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                    <div class="product-name">{{ sections.skincare.product_1.name }}</div>
+                    <div class="product-desc">{{ sections.skincare.product_1.description|truncatewords:5 }}</div>
+                </div>
+                {% endif %}
+                {% if sections.skincare.product_2 %}
+                <div class="product-item">
+                    {% if sections.skincare.product_2.main_image %}
+                        <img src="{{ sections.skincare.product_2.main_image.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                    <div class="product-name">{{ sections.skincare.product_2.name }}</div>
+                    <div class="product-desc">{{ sections.skincare.product_2.description|truncatewords:5 }}</div>
+                </div>
+                {% endif %}
+            {% else %}
+                 <p style="text-align: center; width: 100%;">No products selected in Admin.</p>
+            {% endif %}
+        </div>
+        <div class="right">
+            <div class="logo">D I O R</div>
+            <div class="title">Dior Skincare</div>
+            <div class="subtitle">{{ sections.skincare.subtitle|default:"The Science of Radiance" }}</div>
+            <div class="divider"></div>
+            <div class="desc">{{ sections.skincare.description|default:"Experience luxury skincare with Dior..." }}</div>
+            <a href="{% url 'skincare_url' %}" class="btn2">Discover Skincare</a>
+        </div>
+    </div>
+
+    <!-- بخش آرایشی -->
+    <div class="container-reverse" style="margin-bottom:100px;">
+        <div class="right-reverse">
+            <div class="logo">D I O R</div>
+            <div class="title">Dior Makeup</div>
+            <div class="subtitle">{{ sections.makeup.subtitle|default:"The Art of Glamour" }}</div>
+            <div class="divider"></div>
+            <div class="desc">{{ sections.makeup.description|default:"Discover Dior makeup — where high-fashion meets high-performance..." }}</div>
+            <a href="{% url 'makeup_url' %}" class="btn2">Discover Makeup</a>
+        </div>
+        <div class="left-reverse">
+            {% if sections.makeup %}
+                {% if sections.makeup.product_1 %}
+                <div class="product-item">
+                    {% if sections.makeup.product_1.main_image %}
+                        <img src="{{ sections.makeup.product_1.main_image.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                    <div class="product-name">{{ sections.makeup.product_1.name }}</div>
+                    <div class="product-desc">{{ sections.makeup.product_1.description|truncatewords:5 }}</div>
+                </div>
+                {% endif %}
+                {% if sections.makeup.product_2 %}
+                <div class="product-item">
+                    {% if sections.makeup.product_2.main_image %}
+                        <img src="{{ sections.makeup.product_2.main_image.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'assets/placeholder.jpg' %}" alt="No image">
+                    {% endif %}
+                    <div class="product-name">{{ sections.makeup.product_2.name }}</div>
+                    <div class="product-desc">{{ sections.makeup.product_2.description|truncatewords:5 }}</div>
+                </div>
+                {% endif %}
+            {% else %}
+                 <p style="text-align: center; width: 100%;">No products selected in Admin.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="dior-brand-card">
+        <div class="brand-header">
+            <div class="brand-name">
+                Christian Dior
+            </div>
+        </div>
+        <div class="brand-description">
+            <strong>Christian Dior</strong> is a French luxury fashion house
+            that has defined elegance, sophistication, and timeless style
+            since its founding in 1946. Renowned for the iconic
+            <span class="highlight">"New Look"</span> silhouette, Dior
+            revolutionized post-war fashion with its emphasis on femininity,
+            structured tailoring, and opulent fabrics. Today, the house
+            continues to lead the global luxury industry across haute couture,
+            ready-to-wear, accessories, and fine fragrances — remaining a
+            symbol of <strong>French savoir-faire</strong> and artistic
+            excellence.
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dior{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        nav{display: flex;align-items: center;justify-content: space-between;}
+        .boxn {position: fixed;top: 0;left: 0;right: 0;width: 100%;padding: 13px 25px;background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);-webkit-backdrop-filter: blur(10px);box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);z-index: 1000;}
+        .aa{display: flex; align-items: center;gap: 35px;}
+        .aa a { text-decoration: none; color: #333; font-weight: 500; transition: 0.3s; }
+        .aa a:hover { color: #c9a96e; }
+
+        /* 👇 استایل باکس سرچ 👇 */
+        .search-form {
+            display: flex;
+            align-items: center;
+            background: #f1f1f1;
+            border-radius: 30px;
+            padding: 6px 15px;
+            flex: 1;
+            max-width: 350px;
+            margin: 0 20px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .search-form:focus-within {
+            background: #fff;
+            border-color: #c9a96e;
+            box-shadow: 0 0 8px rgba(201, 169, 110, 0.3);
+        }
+        .search-form input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 13px;
+            color: #333;
+        }
+        .search-form input::placeholder {
+            color: #999;
+        }
+        .search-form button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #555;
+            font-size: 14px;
+            padding: 0 5px;
+            transition: 0.3s;
+        }
+        .search-form button:hover {
+            color: #c9a96e;
+        }
+
+        /* 👇 استایل آیکون سبد خرید 👇 */
+        .cart-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            position: relative;
+        }
+        .cart-link i {
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .aa {display: flex;gap: 12px;}
+            .aa a {font-size: 13px;display: block;}
+            .mg {width: 50px;height: 25px;}
+            .boxn {padding: 10px 12px;}
+            .search-form { display: none; } /* توی موبایل مخفی میشه تا شلوغ نشه */
+        }
+
+        @media (max-width: 420px) {
+            .aa {display: flex;gap: 8px;}
+            .aa a {font-size: 10px;display: block;}
+            .mg {width: 40px;height: 20px;}
+            .boxn {padding: 8px 10px;}
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <div class="boxn">
+        <nav>
+            <a href="{% url 'home_url' %}"><img src="{% static 'assets/Dior-Logo-600x600.webp' %}" alt="" class="mg"></a>
+            
+            <!-- 👇 باکس سرچ توی نوار ناوبری 👇 -->
+            <form action="{% url 'search_url' %}" method="GET" class="search-form">
+                <input type="text" name="q" placeholder="Search products..." value="{{ request.GET.q|default:'' }}">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <div class="aa">
+                <a href="{% url 'home_url' %}">Home</a>
+                <a href="{% url 'collections_url' %}">Collections</a>
+                <a href="{% url 'about_url' %}">About Us</a>
+                
+                <!-- 👇 آیکون سبد خرید 👇 -->
+                <a href="{% url 'cart_url' %}" class="cart-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Cart</span>
+                </a>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout_url' %}" 
+                       onclick="return confirm('Do you really want to log out of your account?');" 
+                       style="color: #333; font-weight: 600; margin: 0 10px; text-decoration: none; cursor: pointer;">
+                       Hi, {{ user.first_name|default:user.username }}
+                    </a>
+                {% else %}
+                    <a href="{% url 'auth_url' %}">Sign In</a>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+
+    <main style="padding-top: 80px;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <h2>DIOR</h2>
+        <hr>
+        <div class="footer-content">
+            <div class="footer-left">
+                <h4>Navigation</h4>
+                <a href="{% url 'home_url' %}">Home</a>
+                <a href="{% url 'collections_url' %}">Collections</a>
+                <a href="{% url 'about_url' %}">About Us</a>
+                <a href="{% url 'auth_url' %}">Login</a>
+            </div>
+            <div class="footer-right">
+                <h4>Follow Us</h4>
+                <a href="https://www.instagram.com/dior/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                <a href="https://www.facebook.com/Dior/" target="_blank"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+                <a href="https://www.pinterest.com/dior/" target="_blank"><i class="fa-brands fa-pinterest-p"></i> Pinterest</a>
+                <a href="https://www.youtube.com/@Dior" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a>
+            </div>
+        </div>
+        <p class="copyright">© 2025 Designed by Denisa</p>
+    </footer>
+
+</body>
+</html>

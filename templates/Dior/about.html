@@ -1,0 +1,426 @@
+{% extends 'Dior/base.html' %}
+{% load static %}
+
+{% block title %}About Dior{% endblock %}
+
+{% block extra_css %}
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    body{
+        background:#e4e4e4;
+        color:black;
+        line-height:1.8;
+    }
+
+    .about{
+        max-width:1100px;
+        margin:40px auto;
+        padding:20px 30px;
+    }
+
+    .about h1{
+        text-align:center;
+        font-size:48px;
+        color:#1a1a1a;
+        letter-spacing:6px;
+        margin-bottom:10px;
+        font-weight:300;
+        border-bottom:2px solid #c9a96e;
+        padding-bottom:18px;
+    }
+
+    .about h1 span{
+        color:#c9a96e;
+        font-weight:700;
+    }
+
+    .about-content{
+        padding:20px 10px;
+    }
+
+    .about-content p{
+        font-size:17px;
+        color:#2d2d2d;
+        margin-bottom:22px;
+        text-align:justify;
+    }
+
+    .about-content .highlight{
+        color:#c9a96e;
+        font-weight:600;
+    }
+
+    .about-content strong{
+        color:#1a1a1a;
+    }
+
+    .about-content .quote{
+        font-style:italic;
+        font-size:20px;
+        color:#555;
+        text-align:center;
+        padding:25px 30px;
+        margin:30px 0;
+        background:#f5f0eb;
+        border-radius:12px;
+        border-left:4px solid #c9a96e;
+    }
+
+    .about-content .quote-author{
+        display:block;
+        margin-top:10px;
+        font-size:15px;
+        color:#888;
+        font-style:normal;
+    }
+
+    .designer-section{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+        gap:25px;
+        margin:35px 0 20px;
+    }
+
+    .designer-card{
+        background:#f8f5f2;
+        padding:25px 20px;
+        border-radius:14px;
+        border:1px solid #e8e0d8;
+        transition:.3s;
+    }
+
+    .designer-card:hover{
+        transform:translateY(-5px);
+        box-shadow:0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .designer-card h3{
+        color:#1a1a1a;
+        font-size:20px;
+        letter-spacing:1px;
+        margin-bottom:8px;
+        border-bottom:1px solid #ddd;
+        padding-bottom:8px;
+    }
+
+    .designer-card h3 span{
+        color:#c9a96e;
+        font-weight:300;
+        font-size:15px;
+        letter-spacing:1px;
+    }
+
+    .designer-card p{
+        font-size:14.5px;
+        color:#444;
+        line-height:1.7;
+        margin-top:10px;
+    }
+
+    .legacy{
+        background:#f5f0eb;
+        padding:30px 35px;
+        border-radius:14px;
+        margin-top:30px;
+        border-left:5px solid #c9a96e;
+    }
+
+    .legacy h3{
+        color:#1a1a1a;
+        font-size:22px;
+        letter-spacing:2px;
+        margin-bottom:12px;
+    }
+
+    .legacy p{
+        font-size:16px;
+        color:#333;
+        margin-bottom:0;
+    }
+
+    @media (max-width: 768px) {
+        .about {
+            margin: 20px 15px;
+            padding: 18px 16px;
+        }
+
+        .about h1 {
+            font-size: 32px;
+            letter-spacing: 3px;
+            padding-bottom: 12px;
+        }
+
+        .about-content p {
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .about-content .quote {
+            font-size: 17px;
+            padding: 18px 20px;
+            margin: 20px 0;
+        }
+
+        .designer-section {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .designer-card {
+            padding: 18px 16px;
+        }
+
+        .designer-card h3 {
+            font-size: 18px;
+        }
+
+        .designer-card p {
+            font-size: 14px;
+        }
+
+        .legacy {
+            padding: 20px 18px;
+        }
+
+        .legacy h3 {
+            font-size: 18px;
+        }
+
+        .legacy p {
+            font-size: 14.5px;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .about {
+            margin: 12px 10px;
+            padding: 12px 12px;
+            border-radius: 12px;
+        }
+
+        .about h1 {
+            font-size: 24px;
+            letter-spacing: 2px;
+            padding-bottom: 10px;
+        }
+
+        .about-content {
+            padding: 8px 4px;
+        }
+
+        .about-content p {
+            font-size: 13.5px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .about-content .quote {
+            font-size: 15px;
+            padding: 14px 16px;
+            margin: 16px 0;
+        }
+
+        .designer-section {
+            gap: 14px;
+        }
+
+        .designer-card {
+            padding: 14px 12px;
+            border-radius: 10px;
+        }
+
+        .designer-card h3 {
+            font-size: 16px;
+        }
+
+        .designer-card h3 span {
+            font-size: 13px;
+        }
+
+        .designer-card p {
+            font-size: 13px;
+        }
+
+        .legacy {
+            padding: 16px 14px;
+            border-left-width: 4px;
+        }
+
+        .legacy h3 {
+            font-size: 16px;
+        }
+
+        .legacy p {
+            font-size: 13px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <main class="about" style="padding-top: 100px;">
+        <h1>ABOUT <span>DIOR</span></h1>
+
+        <div class="about-content">
+            <p>
+                <strong>Christian Dior</strong> — a name that has become synonymous with 
+                <span class="highlight">French elegance</span>, luxury, and the art of 
+                haute couture. Founded in <strong>1946</strong> at 30 Avenue Montaigne in 
+                Paris, the House of Dior emerged as a beacon of hope and beauty in the 
+                post-war era. With his groundbreaking <strong>"New Look"</strong> collection 
+                in 1947, Christian Dior redefined women's fashion, celebrating femininity, 
+                grace, and opulence through soft shoulders, cinched waists, and full, 
+                flowing skirts. This iconic silhouette revolutionized the fashion industry 
+                and established Dior as the epitome of timeless sophistication.
+            </p>
+
+            <p>
+                Since its inception, Dior has been a canvas for visionary designers who 
+                have each left an indelible mark on the house's legacy. After Christian Dior's 
+                sudden passing in 1957, the young <strong>Yves Saint Laurent</strong> took 
+                the helm, bringing a youthful, modern energy to the brand with his "Trapeze" 
+                collection. He was followed by <strong>Marc Bohan</strong>, who introduced 
+                the romantic "Slim Look" in the 1960s, and <strong>Gianfranco Ferré</strong>, 
+                whose architectural approach to design brought a bold, sculptural aesthetic 
+                to the house in the 1980s.
+            </p>
+
+            <p>
+                In 1996, the flamboyant and audacious <strong>John Galliano</strong> became 
+                the creative director, infusing Dior with theatrical drama, historical 
+                references, and a fearless sense of fantasy. His elaborate shows and 
+                extravagant designs pushed the boundaries of fashion and captivated the 
+                world. In 2011, <strong>Raf Simons</strong> took over, offering a more 
+                minimalist, modern, and architectural vision, seamlessly blending Dior's 
+                heritage with contemporary sensibility. His work paid homage to the house's 
+                archives while propelling it into the 21st century.
+            </p>
+
+            <p>
+                Since 2016, the visionary <strong>Maria Grazia Chiuri</strong> has been at 
+                the creative helm, becoming the first female creative director in Dior's 
+                history. Her feminist perspective has redefined the Dior woman, empowering 
+                her through designs that merge <span class="highlight">craftsmanship, 
+                activism, and elegance</span>. Chiuri's collections pay tribute to the 
+                house's heritage while embracing modern femininity, celebrating women from 
+                all walks of life. From iconic handbags like the <strong>Lady Dior</strong> 
+                and <strong>Saddle Bag</strong> to exquisite haute couture gowns and 
+                luxurious fragrances like <strong>J'adore</strong> and <strong>Miss Dior</strong>, 
+                the house continues to inspire and captivate.
+            </p>
+
+            <div class="quote">
+                "Dior is more than a fashion house. It is a philosophy of elegance, 
+                a celebration of beauty, and a legacy of excellence that continues 
+                to shape the world of luxury."
+                <span class="quote-author">— Christian Dior</span>
+            </div>
+
+            <p>
+                Today, Dior stands as a global symbol of <strong>French savoir-faire</strong>, 
+                offering an extensive range of products that include haute couture, 
+                ready-to-wear, leather goods, jewelry, watches, eyewear, and cosmetics. 
+                With boutiques in the world's most prestigious cities and a passionate 
+                following of celebrities, royals, and fashion enthusiasts, Dior remains 
+                at the forefront of the luxury industry. The house's commitment to 
+                <span class="highlight">artistic excellence, innovation, and timeless 
+                beauty</span> ensures that the spirit of Christian Dior lives on, 
+                inspiring generations to come.
+            </p>
+
+            <p>
+                From the runway to the red carpet, from the streets to the silver screen, 
+                Dior has dressed the world's most influential figures, including 
+                <strong>Princess Diana</strong>, <strong>Rihanna</strong>, 
+                <strong>Angelina Jolie</strong>, <strong>Natalie Portman</strong>, 
+                and <strong>Johnny Depp</strong>. The house's collaborations with 
+                contemporary artists, photographers, and filmmakers have blurred the 
+                lines between fashion, art, and culture, solidifying Dior's position 
+                as a cultural institution.
+            </p>
+
+            <div class="designer-section">
+                <div class="designer-card">
+                    <h3>Christian Dior <span>(1946–1957)</span></h3>
+                    <p>
+                        The founder and visionary who revolutionized fashion with the 
+                        "New Look." His designs emphasized femininity, elegance, and 
+                        luxury, creating a new standard of beauty that defined the 
+                        post-war era.
+                    </p>
+                </div>
+
+                <div class="designer-card">
+                    <h3>Yves Saint Laurent <span>(1957–1960)</span></h3>
+                    <p>
+                        The youngest designer to lead the house, Saint Laurent brought 
+                        a modern, youthful energy to Dior. His "Trapeze" collection 
+                        offered a softer, more liberated silhouette.
+                    </p>
+                </div>
+
+                <div class="designer-card">
+                    <h3>Marc Bohan <span>(1960–1989)</span></h3>
+                    <p>
+                        With a romantic and refined aesthetic, Bohan introduced the 
+                        "Slim Look" and dressed European royalty and Hollywood legends 
+                        for nearly three decades.
+                    </p>
+                </div>
+
+                <div class="designer-card">
+                    <h3>Gianfranco Ferré <span>(1989–1996)</span></h3>
+                    <p>
+                        Known for his architectural approach and sculptural designs, 
+                        Ferré brought boldness and structure to the house, elevating 
+                        Dior's craftsmanship to new heights.
+                    </p>
+                </div>
+
+                <div class="designer-card">
+                    <h3>John Galliano <span>(1996–2011)</span></h3>
+                    <p>
+                        A theatrical genius, Galliano's extravagant and dramatic 
+                        collections infused Dior with fantasy, historical references, 
+                        and show-stopping runway moments.
+                    </p>
+                </div>
+
+                <div class="designer-card">
+                    <h3>Raf Simons <span>(2011–2015)</span></h3>
+                    <p>
+                        Bringing a minimalist and modern vision, Simons honored Dior's 
+                        heritage while embracing contemporary elegance and clean, 
+                        architectural lines.
+                    </p>
+                </div>
+
+                <div class="designer-card">
+                    <h3>Maria Grazia Chiuri <span>(2016–Present)</span></h3>
+                    <p>
+                        As the first female creative director, Chiuri merges 
+                        feminism, craftsmanship, and elegance. Her designs empower 
+                        women and celebrate diversity, creativity, and inclusivity.
+                    </p>
+                </div>
+            </div>
+
+            <div class="legacy">
+                <h3>The Legacy Continues</h3>
+                <p>
+                    Dior's journey is far from over. With each new collection, the 
+                    house continues to push boundaries, challenge conventions, and 
+                    redefine luxury for a new generation. From sustainable practices 
+                    to digital innovation, Dior embraces the future while cherishing 
+                    its extraordinary past. The story of Dior is a testament to the 
+                    power of creativity, passion, and the eternal pursuit of beauty.
+                </p>
+            </div>
+        </div>
+    </main>
+{% endblock %}

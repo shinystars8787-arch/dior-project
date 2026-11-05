@@ -1,0 +1,367 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #e4e4e4;
+    font-family: sans-serif;
+    padding-top: 90px;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 13px 25px;
+
+    background-color: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+.navbar{
+    display: none;
+}
+
+a{
+    font-size: 16px;
+    text-decoration: none;
+    color: #414141;
+    display: flex;
+}
+
+a:hover{
+    color: black;
+    text-decoration: underline;
+}
+
+.mg{
+    width: 70px;
+    height: 30px ;
+    object-fit: cover;
+}
+
+.b1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aa{
+    display: flex; 
+    align-items: center;
+    gap: 35px;
+}
+
+.footer{
+    width: 100%;
+    margin: 80px 0 0;
+    background: linear-gradient(135deg,#fafafa,#ececec,#f6f6f6);
+    border-top: 1px solid #d8c08d;
+    padding: 18px 80px 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.footer h2{
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 8px;
+    color: #4b4b4b;
+    margin-bottom: 8px;
+    font-family: "Times New Roman", serif;
+}
+
+.footer hr{
+    border: none;
+    height: 1px;
+    background: #d8d8d8;
+    margin-bottom: 30px;
+}
+
+.footer-content{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 180px;
+}
+
+.footer-left,
+.footer-right{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.footer h4{
+    color: #8a8a8a;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.footer a{
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.footer a:hover{
+    color: #b89d68;
+    transform: translateX(6px);
+}
+
+.footer i{
+    width: 25px;
+    text-align: center;
+    margin-right: 6px;
+}
+
+.copyright{
+    text-align: center;
+    margin-top: 15px;
+    color: #888;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+
+@media (max-width: 1024px) and (min-width: 769px) {
+
+    .footer {
+        padding: 25px 50px 18px;
+        margin: 60px 0 0;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0;
+        max-width: 100%;
+    }
+
+    .footer-left {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .footer-right {
+        align-items: flex-end;
+        text-align: right;
+    }
+
+    .footer h2 {
+        font-size: 24px;
+        letter-spacing: 6px;
+    }
+
+    .footer h4 {
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .footer-right h4 {
+        text-align: right;
+    }
+
+    .footer a {
+        font-size: 13px;
+    }
+
+    .footer-left a {
+        text-align: left;
+    }
+
+    .footer-right a {
+        text-align: right;
+    }
+
+    .footer i {
+        width: 25px;
+        margin-right: 6px;
+    }
+
+    .footer-right i {
+        margin-right: 0;
+        margin-left: 6px;
+    }
+
+    .footer a:hover {
+        transform: translateX(6px);
+    }
+
+    .footer-right a:hover {
+        transform: translateX(-6px);
+    }
+}
+
+@media (max-width: 768px) {
+    .aa{
+        display: none;
+    }
+    .navbar{
+        display: flex;
+    }
+
+    .footer {
+        padding: 30px 24px 20px;
+        margin: 40px 0 0;
+    }
+
+    .footer h2 {
+        font-size: 22px;
+        letter-spacing: 5px;
+        margin-bottom: 6px;
+        text-align: center;
+    }
+
+    .footer hr {
+        margin-bottom: 25px;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .footer-left {
+        align-items: flex-start;
+        text-align: left;
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .footer-right {
+        align-items: flex-end;
+        text-align: right;
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .footer h4 {
+        font-size: 13px;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+    .footer-right h4 {
+        text-align: right;
+    }
+
+    .footer a {
+        font-size: 13px;
+        text-align: left;
+    }
+
+    .footer-right a {
+        text-align: right;
+    }
+
+    .footer i {
+        width: 22px;
+        margin-right: 8px;
+    }
+
+    .footer-right i {
+        margin-right: 0;
+        margin-left: 8px;
+    }
+
+    .footer a:hover {
+        transform: translateX(4px);
+    }
+
+    .footer-right a:hover {
+        transform: translateX(-4px);
+    }
+
+    .copyright {
+        font-size: 10px;
+        margin-top: 20px;
+        letter-spacing: 0.5px;
+        text-align: center;
+    }
+    .side-menu {
+        width: 240px;
+        left: -260px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .aa{
+        display: none;
+    }
+    .navbar{
+        display: flex;
+    }
+
+    .footer {
+        padding: 25px 16px 16px;
+        margin: 30px 0 0;
+    }
+
+    .footer h2 {
+        font-size: 18px;
+        letter-spacing: 4px;
+        margin-bottom: 4px;
+    }
+
+    .footer hr {
+        margin-bottom: 18px;
+    }
+
+    .footer-content {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .footer-left {
+        min-width: 80px;
+    }
+
+    .footer-right {
+        min-width: 80px;
+    }
+
+    .footer h4 {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .footer a {
+        font-size: 11px;
+    }
+
+    .footer i {
+        width: 18px;
+        font-size: 11px;
+        margin-right: 6px;
+    }
+
+    .footer-right i {
+        margin-right: 0;
+        margin-left: 6px;
+    }
+
+    .copyright {
+        font-size: 9px;
+        margin-top: 15px;
+        letter-spacing: 0.3px;
+    }
+}

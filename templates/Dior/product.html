@@ -1,0 +1,128 @@
+{% extends 'Dior/base.html' %}
+{% load static %}
+
+{% block title %}Collections | Dior{% endblock %}
+
+{% block extra_css %}
+<style>
+    .container { display: flex; width: 100%; height: 100vh; margin-top: -113px; }
+    .left { width: 40%; height: 100%; background: #f0ebe3; background-size: cover; background-position: center; }
+    .right { width: 60%; height: 100%; background: #e4e4e4; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px; text-align: center; }
+    
+    .container-reverse { display: flex; width: 100%; height: 100vh; margin-top: 0; }
+    .left-reverse { width: 40%; height: 100%; background-size: cover; background-position: center; }
+    .right-reverse { width: 60%; height: 100%; background: #e4e4e4; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px; text-align: center; }
+
+    .logo { font-size: 20px; letter-spacing: 8px; font-weight: bold; color: #1a1a1a; margin-bottom: 8px; }
+    .title { font-size: 52px; font-weight: 300; letter-spacing: 4px; color: #1a1a1a; margin: 5px 0; }
+    .subtitle { font-size: 15px; font-weight: 300; letter-spacing: 3px; color: #999; margin-bottom: 12px; }
+    .divider { width: 40px; height: 1px; background: #c9a96e; margin: 12px 0; }
+    .desc { font-size: 14px; line-height: 1.9; color: #555; max-width: 350px; margin-bottom: 25px; font-family: 'Arial', sans-serif; }
+    .btn { background: #1a1a1a; color: #fff; padding: 14px 45px; text-decoration: none; letter-spacing: 2.5px; font-size: 12px; font-family: 'Arial', sans-serif; text-transform: uppercase; transition: 0.3s; }
+    .btn:hover { background-color: #e4e4e4; color: black; border: 1px solid rgb(50, 50, 50); }
+
+    @media (max-width: 1024px) {
+        .container, .container-reverse { flex-direction: column; height: auto; min-height: 500px; margin-top: 0; }
+        .container-reverse { flex-direction: column-reverse; }
+        .left, .left-reverse { width: 100%; height: 400px; }
+        .right, .right-reverse { width: 100%; padding: 50px 30px; }
+        .title { font-size: 38px; }
+        .desc { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+        .container, .container-reverse { min-height: 400px; height: auto; margin-top: 0; }
+        .container-reverse { flex-direction: column-reverse; }
+        .left, .left-reverse { height: 300px; width: 100%; }
+        .right, .right-reverse { width: 100%; padding: 40px 20px; }
+        .title { font-size: 32px; letter-spacing: 2px; }
+        .subtitle { font-size: 13px; letter-spacing: 2px; }
+        .desc { font-size: 13px; padding: 0 10px; max-width: 100%; }
+        .logo { font-size: 16px; letter-spacing: 5px; }
+        .btn { padding: 12px 35px; font-size: 11px; }
+    }
+    @media (max-width: 480px) {
+        .left, .left-reverse { height: 250px; }
+        .right, .right-reverse { padding: 30px 15px; }
+        .title { font-size: 26px; }
+        .subtitle { font-size: 12px; }
+        .desc { font-size: 12px; line-height: 1.7; }
+        .logo { font-size: 14px; letter-spacing: 4px; }
+        .btn { padding: 10px 30px; font-size: 10px; }
+    }
+</style>
+
+{% if sections.makeup.section_image %}
+<style>.bg-makeup { background-image: url('{{ sections.makeup.section_image.url }}') !important; }</style>
+{% else %}
+<style>.bg-makeup { background-image: url('{% static "assets/22.jpg" %}'); }</style>
+{% endif %}
+
+{% if sections.perfumes.section_image %}
+<style>.bg-fragrance { background-image: url('{{ sections.perfumes.section_image.url }}') !important; }</style>
+{% else %}
+<style>.bg-fragrance { background-image: url('{% static "assets/25.webp" %}'); }</style>
+{% endif %}
+
+{% if sections.skincare.section_image %}
+<style>.bg-skincare { background-image: url('{{ sections.skincare.section_image.url }}') !important; }</style>
+{% else %}
+<style>.bg-skincare { background-image: url('{% static "assets/20.webp" %}'); }</style>
+{% endif %}
+
+{% if sections.shoes.section_image %}
+<style>.bg-heels { background-image: url('{{ sections.shoes.section_image.url }}') !important; }</style>
+{% else %}
+<style>.bg-heels { background-image: url('{% static "assets/27.webp" %}'); }</style>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="left bg-makeup"></div>
+        <div class="right">
+            <div class="logo">D I O R</div>
+            <div class="title">{{ sections.makeup.big_title|default:"Lucky Clover" }}</div>
+            <div class="subtitle">{{ sections.makeup.subtitle|default:"Fall 2026 Makeup Collection" }}</div>
+            <div class="divider"></div>
+            <div class="desc">{{ sections.makeup.description|default:"Limited-edition makeup collection inspired by the elegance and luck of the four-leaf clover." }}</div>
+            <a href="{% url 'makeup_url' %}" class="btn">Discover Makeup</a>
+        </div>
+    </div>
+
+    <div class="container-reverse">
+        <div class="right-reverse">
+            <div class="logo">D I O R</div>
+            <div class="title">{{ sections.perfumes.big_title|default:"Dior Parfums" }}</div>
+            <div class="subtitle">{{ sections.perfumes.subtitle|default:"The Art of French Fragrance" }}</div>
+            <div class="divider"></div>
+            <div class="desc">{{ sections.perfumes.description|default:"Discover the timeless elegance of Dior's most iconic perfumes..." }}</div>
+            <a href="{% url 'perfumes_url' %}" class="btn">Explore Fragrances</a>
+        </div>
+        <div class="left-reverse bg-fragrance"></div>
+    </div>
+
+    <div class="container">
+        <div class="left bg-skincare"></div>
+        <div class="right">
+            <div class="logo">D I O R</div>
+            <div class="title">{{ sections.skincare.big_title|default:"Dior Skincare" }}</div>
+            <div class="subtitle">{{ sections.skincare.subtitle|default:"The Science of Radiance" }}</div>
+            <div class="divider"></div>
+            <div class="desc">{{ sections.skincare.description|default:"Experience the ultimate in luxury skincare with Dior's advanced formulations..." }}</div>
+            <a href="{% url 'skincare_url' %}" class="btn">Discover Skincare</a>
+        </div>
+    </div>
+
+    <div class="container-reverse" style="margin-bottom: 50px;">
+        <div class="right-reverse">
+            <div class="logo">D I O R</div>
+            <div class="title">{{ sections.shoes.big_title|default:"Dior Heels" }}</div>
+            <div class="subtitle">{{ sections.shoes.subtitle|default:"Elegance in Every Step" }}</div>
+            <div class="divider"></div>
+            <div class="desc">{{ sections.shoes.description|default:"Discover Dior's exquisite high heels — from classic pumps to statement stilettos..." }}</div>
+            <a href="{% url 'shoes_url' %}" class="btn">Discover Heels</a>
+        </div>
+        <div class="left-reverse bg-heels"></div>
+    </div>
+{% endblock %}

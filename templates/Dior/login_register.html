@@ -1,0 +1,185 @@
+{% extends 'Dior/base.html' %}
+{% load static %}
+
+{% block title %}Login / Sign Up | DIOR{% endblock %}
+
+{% block extra_css %}
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { min-height:100vh; display:flex; flex-direction:column; background:#e4e4e4; font-family:Arial, sans-serif; }
+    main { flex:1; display:flex; justify-content:center; align-items:center; padding: 40px 0; }
+    
+    .auth-box {
+        background:#ececec;
+        border-radius:20px;
+        box-shadow:0 8px 24px rgba(0,0,0,.12);
+        width:420px;
+        overflow: hidden;
+        transition:.3s;
+    }
+
+    .tabs {
+        display: flex;
+        background: #dcdcdc;
+    }
+    .tab-btn {
+        flex: 1;
+        padding: 15px;
+        text-align: center;
+        background: transparent;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        color: #555;
+        cursor: pointer;
+        transition: 0.3s;
+        letter-spacing: 1px;
+    }
+    .tab-btn:hover {
+        background: #d0d0d0;
+    }
+    .tab-btn.active {
+        background: #ececec;
+        color: #1a1a1a;
+        border-bottom: 3px solid #1a1a1a;
+    }
+
+    .form-container {
+        padding: 40px;
+    }
+    .auth-form {
+        display: none;
+        animation: fadeIn 0.4s ease-in-out;
+    }
+    .auth-form.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 { text-align:center; margin-bottom:25px; color:#1a1a1a; font-weight:600; letter-spacing:1px; }
+    
+    .group { display:flex; flex-direction:column; margin-bottom:15px; }
+    label { margin-bottom:6px; color:#333; font-size:13px; font-weight:500; }
+    input { padding:12px; border:1px solid #b0b0b0; border-radius:8px; background:#F8F8F8; color:#1A1A1A; font-size:14px; transition:0.3s; }
+    input:focus { outline:none; border-color:#1a1a1a; box-shadow:0 0 8px rgba(0,0,0,0.1); background: #fff; }
+    input::placeholder { color:#a0a0a0; }
+    
+    button[type="submit"] {
+        width:100%;
+        padding:14px;
+        margin-top: 15px;
+        border:none;
+        border-radius:1000px;
+        background:#1a1a1a;
+        color:white;
+        font-size:15px;
+        transition:.3s;
+        cursor:pointer;
+        font-weight:600;
+        letter-spacing:1px;
+    }
+    button[type="submit"]:hover { background:#333; }
+
+    .message-box { padding: 0 40px; margin-top: 20px; }
+    .alert { padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 10px; font-size: 13px; }
+    .alert-error { background: #fde8e8; color: #c0392b; border: 1px solid #fad4d4; }
+    .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+
+    @media (max-width: 480px) {
+        .auth-box { width: 90%; }
+        .form-container { padding: 30px 20px; }
+        .message-box { padding: 0 20px; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <main style="flex-direction: column; padding-top: 100px;">
+        {% if messages %}
+        <div class="message-box" style="width:100%; display:flex; justify-content:center;">
+            <div style="width: 420px;">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="auth-box">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('login')">Login</button>
+                <button class="tab-btn" onclick="openTab('signup')">Sign Up</button>
+            </div>
+
+            <div class="form-container">
+                <!-- فرم ورود -->
+                <form class="auth-form active" id="login-form" method="POST" action="{% url 'auth_url' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="login">
+                    <h2>Welcome Back</h2>
+                    <div class="group">
+                        <label for="login-email">Email or Username</label>
+                        <input id="login-email" name="email" type="text" placeholder="Enter your email or username" required>
+                    </div>
+                    <div class="group">
+                        <label for="login-password">Password</label>
+                        <input id="login-password" name="password" type="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit">Sign In</button>
+                </form>
+
+                <!-- فرم ثبت‌نام -->
+                <form class="auth-form" id="signup-form" method="POST" action="{% url 'auth_url' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="signup">
+                    <h2>Create Account</h2>
+                    <div class="group">
+                        <label for="signup-name">Full Name</label>
+                        <input id="signup-name" name="name" type="text" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="group">
+                        <label for="signup-email">Email Address</label>
+                        <input id="signup-email" name="email" type="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="group">
+                        <label for="signup-username">Username</label>
+                        <input id="signup-username" name="username" type="text" placeholder="Choose a username" required>
+                    </div>
+                    <div class="group">
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" name="password" type="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="group">
+                        <label for="signup-password2">Confirm Password</label>
+                        <input id="signup-password2" name="password2" type="password" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function openTab(tabName) {
+        var forms = document.querySelectorAll('.auth-form');
+        forms.forEach(form => form.classList.remove('active'));
+
+        var tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        if (tabName === 'login') {
+            document.getElementById('login-form').classList.add('active');
+            tabs[0].classList.add('active');
+        } else {
+            document.getElementById('signup-form').classList.add('active');
+            tabs[1].classList.add('active');
+        }
+    }
+</script>
+{% endblock %}
